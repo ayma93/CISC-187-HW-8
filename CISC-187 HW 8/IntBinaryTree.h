@@ -15,7 +15,7 @@ private:
 	};
 	TreeNode* root; // Pointer to Root Node
 
-	// Private Member functions
+					// Private Member functions
 	void insert(TreeNode *&, TreeNode *&);
 	void destroySubTree(TreeNode*);
 	void deleteNode(int, TreeNode *&);
@@ -30,20 +30,20 @@ public:
 	}
 
 	// Destructor
-	IntBinaryTree()
+	~IntBinaryTree()
 	{
 		destroySubTree(root);
 	}
 
-	// Binary  Tree Operations
+	// Default Binary Tree Operations
 	void insertNode(int);
 	bool searchNode(int);
 	void remove(int);
-	void displayInOrder() const
-	{
-		displayInOrder(root);
-	}
+	void displayInOrder() const;
+
+	// New Binary Tree Operations
+	int leafCount(TreeNode*);
+	int treeHeight(TreeNode*);
+	int treeWidth(TreeNode*);
 };
-
 #endif // !INTBINARYTREE_H
-
