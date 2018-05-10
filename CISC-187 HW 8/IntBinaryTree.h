@@ -26,6 +26,7 @@ private:
 	int leafCount(TreeNode*);
 	int treeHeight(TreeNode*);
 	int treeWidth(TreeNode*);
+	int levelWidth(TreeNode* nodePtr, int level);
 
 public:
 	// Constructor

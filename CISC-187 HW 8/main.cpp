@@ -24,6 +24,9 @@ int main()
 	cout << "Checking tree height...." << endl;
 	cout << "Tree height is " << newTree.treeHeight() << endl;
 
+	cout << "Checking tree width...." << endl;
+	cout << "Tree width is " << newTree.treeWidth() << endl;
+
 	// Introduces pause to be able to read output
 	cin.ignore(256, '\n');
 	cin.get();

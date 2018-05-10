@@ -157,7 +157,7 @@ int IntBinaryTree::leafCount()
 	return leafCount(root);
 }
 
-//returns height of tree (number of levels)
+// Returns height of tree (number of levels)
 int IntBinaryTree::treeHeight(TreeNode* nodePtr)
 {
 	int tHeightLeft;
@@ -184,19 +184,33 @@ int IntBinaryTree::treeHeight()
 }
 
 
-//returns width of tree (largest number of nodes in same level)
+// Returns width of tree (largest number of nodes in same level)
 int IntBinaryTree::treeWidth(TreeNode* nodePtr)
 {
-	
+	int maxWidth = 0;
+	int tempWidth;
+	int height = treeHeight(root);
+
+	for (int level = 1; level <= height; level++) {
+		tempWidth = levelWidth(nodePtr, level);
+		if (tempWidth > maxWidth) {
+			maxWidth = tempWidth;
+		}
+	}
+	return maxWidth;
+}
+
+int IntBinaryTree::levelWidth(TreeNode* nodePtr, int level)
+{
 	if (!nodePtr) {
 		return 0;
 	}
-
-
-	cout << nodePtr->value << endl;
-	treeWidth(nodePtr->left);
-	treeWidth(nodePtr->right);
-
+	if (level == 1) {
+		return 1;
+	}
+	else if (level > 1) {
+		return (levelWidth(nodePtr->left, level - 1) + levelWidth(nodePtr->right, level - 1));
+	}
 }
 
 // Getter for private treeWidth method
