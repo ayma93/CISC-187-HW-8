@@ -98,16 +98,11 @@ void IntBinaryTree::destroySubTree(TreeNode* nodePtr)
 
 void IntBinaryTree::displayInOrder(TreeNode* nodePtr) const
 {
-	int leafCounter = 0;
-
 	if (nodePtr) {
 		displayInOrder(nodePtr->left);
-		cout << "Tree element " << leafCounter << " is " << nodePtr->value << endl;
-		leafCounter++;
+		cout << "Tree element is " << nodePtr->value << endl;
+		//leafCounter++;
 		displayInOrder(nodePtr->right);
-	}
-	else {
-		cout << "Tree is empty." << endl;
 	}
 }
 
@@ -138,87 +133,74 @@ bool IntBinaryTree::searchNode(int num)
 	return false;
 }
 
-//returns leaf count
+// Private function for returning leaf count
+// If Node is NULL, return 0
+// else recursively calculate leaf node;
+// leaf count = left subtree count + right subtree count
+// return 1 if leaf node (left and right are null) found
 int IntBinaryTree::leafCount(TreeNode* nodePtr)
 {
-	int leafCount = 0;
-	nodePtr = root;
-
 	if (!nodePtr) {
-		cout << "Tree is empty." << endl;
-		return leafCount;
+		return 0;
 	}
+	if (nodePtr->left == NULL && nodePtr->right == NULL) {
+		return 1;
+	}
+	else {
+		return leafCount(nodePtr->left) + leafCount(nodePtr->right);
+	}
+}
 
-	while (nodePtr) {
-		if (nodePtr->left) {
-			nodePtr = nodePtr->left;
-		}
-		else if (nodePtr->right) {
-			nodePtr = nodePtr->right;
-		}
-		leafCount++;
-	}
-	return leafCount;
+// Getter for private method leafCount
+int IntBinaryTree::leafCount()
+{
+	return leafCount(root);
 }
 
 //returns height of tree (number of levels)
 int IntBinaryTree::treeHeight(TreeNode* nodePtr)
 {
-	int tHeightLeft = 0;
-	int tHeightRight = 0;
-	int tHeight = 0;
-	nodePtr = root;
+	int tHeightLeft;
+	int tHeightRight;
 
 	if (!nodePtr) {
-		cout << "Tree is empty." << endl;
 		return 0;
 	}
 
-	while (nodePtr) {
-		// Go as far down the left as possible
-		if (nodePtr->left) {
-			nodePtr = nodePtr->left;
-			tHeightLeft++;
-		}
-		// Reset nodePtr to root for right hand side
-		nodePtr = root;
-
-		if (nodePtr->right) {
-			nodePtr = nodePtr->right;
-			tHeightRight++;
-		}
-		// Compare right height and left height
-		if (tHeightLeft >= tHeightRight) {
-			tHeight = tHeightLeft;
-			// return tHeightLeft;
-		}
-		else {
-			tHeight = tHeightRight;
-			//return tHeightRight;
-		}
+	tHeightLeft = treeHeight(nodePtr->left);
+	tHeightRight = treeHeight(nodePtr->right);
+	if (tHeightLeft > tHeightRight) {
+		return tHeightLeft + 1;
 	}
-	return tHeight;
+	else {
+		return tHeightRight + 1;
+	}
 }
+
+// Getter for private treeHeight method
+int IntBinaryTree::treeHeight()
+{
+	return treeHeight(root);
+}
+
 
 //returns width of tree (largest number of nodes in same level)
 int IntBinaryTree::treeWidth(TreeNode* nodePtr)
 {
-	int tWidth = 0;
-	nodePtr = root;
-
+	
 	if (!nodePtr) {
-		cout << "Tree is empty." << endl;
 		return 0;
 	}
 
-	while (nodePtr) {
-		// Go as far left as possible
-		if (nodePtr->left) {
-			nodePtr = nodePtr->left;
-		}
 
+	cout << nodePtr->value << endl;
+	treeWidth(nodePtr->left);
+	treeWidth(nodePtr->right);
 
-
-	}
 }
 
+// Getter for private treeWidth method
+int IntBinaryTree::treeWidth()
+{
+	return treeWidth(root);
+}

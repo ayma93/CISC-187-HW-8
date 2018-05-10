@@ -22,6 +22,11 @@ private:
 	void makeDeletion(TreeNode *&);
 	void displayInOrder(TreeNode*) const;
 
+	// New Binary Tree Operations
+	int leafCount(TreeNode*);
+	int treeHeight(TreeNode*);
+	int treeWidth(TreeNode*);
+
 public:
 	// Constructor
 	IntBinaryTree()
@@ -40,10 +45,10 @@ public:
 	bool searchNode(int);
 	void remove(int);
 	void displayInOrder() const;
+	
+	int leafCount();
+	int treeHeight();
+	int treeWidth();
 
-	// New Binary Tree Operations
-	int leafCount(TreeNode*);
-	int treeHeight(TreeNode*);
-	int treeWidth(TreeNode*);
 };
 #endif // !INTBINARYTREE_H
